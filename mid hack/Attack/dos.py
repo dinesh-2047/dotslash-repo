@@ -68,3 +68,4 @@ if __name__ == "__main__":
         time.sleep(0.2)  # Small delay to avoid overloading the system
     
     input()  # Keeps the program running until user manually stops it
+    #Script is executed and server is crashed we are using this script fo testing purposes
