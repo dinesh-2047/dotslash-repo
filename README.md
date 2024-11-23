@@ -1,81 +1,86 @@
-# dotslash-repo
+# Network Stress Testing Script
 
-## Welcome to the dotslash Hackathon Repository! 🚀
-
-### Instructions:
-- **Fork this repository**: Only one member from each team must fork this repository to their own GitHub account.
-- **Commit directly to your fork**: All submissions, code, and documentation must be committed to your fork. This repository will serve as your primary workspace during the hackathon.
-
-- [Rulebook and Sponsor Problem Statements](https://tanmayrainanda.craft.me/dotslash-info-repo)
----
-
-## Requirements
-
-1. **Pitch Deck**  
-   - All submissions must include a **pitch deck** explaining your idea and its implementation.  
-   
-2. **Well-Commented Code**  
-   - Ensure that all code is well-documented with comments and follows standard coding practices.  
-   
-3. **Mid-Hack Folder**  
-   - Create a folder named `mid-hack` in your fork. This folder should contain all materials required for the **mid-hack submission**, including progress updates, initial implementation, and any supporting files.  
-
-4. **Citation File**  
-   - Include a `citations.md` file in your repository. All external resources (e.g., articles, tutorials, code snippets) must be properly cited here. Failure to do so may result in your project being flagged for plagiarism.
-
-5. **End-Hack Folder**  
-   - Create a folder named `end-hack` in your fork. This folder should contain all materials for the **final submission**, including the completed project, pitch deck, and any supplementary resources.
+This project is a **network stress testing tool** designed for educational and ethical purposes only. The script demonstrates how to create multiple TCP connections and send data to a target server. The goal is to understand the concepts of sockets, threading, and traffic simulation.
 
 ---
 
-## Suggestions for Participants
-
-1. **Maintain Clean and Consistent Code**  
-   - Use comments and docstrings to document your code.  
-   - Follow a consistent naming convention for files, functions, and variables to improve readability.
-
-2. **Commit Regularly**  
-   - Push commits frequently rather than submitting a single large commit at the end.  
-   - This practice not only showcases your progress but also helps in avoiding plagiarism issues.
-
-3. **Version Control Best Practices**  
-   - Use branches for major features or experimental changes and merge them into the main branch after testing.  
-   - Write clear, concise commit messages for better traceability.
-
-4. **Utilize GitHub Issues and Pull Requests**  
-   - Track tasks and discussions using GitHub Issues.  
-   - Use Pull Requests (PRs) to review and merge changes within your team. This will help in maintaining a collaborative workflow.
+## **Features**
+- Creates multiple simultaneous TCP connections to a target.
+- Sends continuous data to the target server.
+- Utilizes threading for high-performance simulations.
+- Includes error handling for connection failures.
 
 ---
 
-## Submission Guidelines
-
-- **Mid-Hack Checkpoint**  
-  Submit the contents of your `mid-hack` folder by the designated checkpoint time. This will include progress updates and preliminary work.
-
-- **Final Submission**  
-  Ensure that all files for your final project are stored in the `end-hack` folder. Your pitch deck and `citations.md` file must also be updated and included here.  
+## **Requirements**
+- Python 3.x
+- A basic understanding of networking and socket programming.
 
 ---
 
-## Resources
+## **Usage**
+### **1. Clone the Repository**
+```bash
+git clone <repository_url>
+cd <repository_directory>
+```
 
-1. **Git and GitHub Basics**  
-   - If you’re new to Git, check out these resources:  
-     - [Git Documentation](https://git-scm.com/doc)  
-     - [GitHub Guides](https://guides.github.com/)  
+### **2. Install Dependencies**
+This script uses only Python’s standard library, so no additional dependencies are required.
 
-2. **Project Ideas**  
-   - Explore hackathon project examples for inspiration:  
-     - [DevPost](https://devpost.com/)  
-     - [Awesome Hackathon Projects](https://github.com/daveverwer/awesome-hackathon-projects)  
+### **3. Run the Script**
+Execute the script using:
+```bash
+python script_name.py
+```
+
+### **4. Provide Input**
+When prompted, enter:
+- **Target IP Address**: The server's IP you want to test.
+- **Target Port**: The port number on which the server is listening.
 
 ---
 
-## Code of Conduct
+## **Script Breakdown**
 
-By participating in this hackathon, you agree to follow the event’s Code of Conduct. Be respectful, inclusive, and ensure a positive experience for all participants.  
+### **1. `make_socket(host, port)`**
+This function:
+- Creates a TCP socket using the target's host and port.
+- Attempts to connect to the server.
+- Handles connection errors by retrying or closing the socket.
 
-For any queries or support, feel free to contact the organizing team.  The full code of conduct can be found at [Fest Website](https://www.fitoorxprayas.in/rules)
+### **2. `attack(host, port, id)`**
+This function:
+- Manages multiple sockets using a list.
+- Sends a null byte (`b"\0"`) to the target continuously.
+- Handles socket errors and reinitializes failed connections.
+- Logs each successful data transmission.
 
-Happy hacking! 🎉
+---
+
+## **Important Notes**
+1. **Educational Use Only**: This script is strictly for testing and educational purposes. Using it on unauthorized systems is illegal and unethical.
+2. **Target Systems**: Always obtain explicit permission before running this tool on any network or server.
+3. **Responsibility**: The author is not responsible for any misuse of this script.
+
+---
+
+## **Future Enhancements**
+- Add support for different payload types.
+- Include logging to track connection statistics.
+- Integrate proxy support for anonymized testing.
+
+---
+
+## **License**
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+---
+
+## **Contributors**
+- **Your Name** (Primary Developer)  
+Feel free to contribute by submitting pull requests or raising issues.
+
+--- 
+
+This README follows a standard format, including all necessary details up to the `attack` function. You can expand it further as you develop additional functionality!
