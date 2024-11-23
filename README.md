@@ -1,6 +1,6 @@
-# Network Stress Testing Script
+# Server Doom
 
-This project is a **network stress testing tool** designed for educational and ethical purposes only. The script demonstrates how to create multiple TCP connections and send data to a target server. The goal is to understand the concepts of sockets, threading, and traffic simulation.
+This project is a **DoS Attack Script** designed for educational and ethical purposes only. The script demonstrates how to create multiple TCP connections and send data to a target server. The goal is to understand the concepts of sockets, threading, and traffic simulation.
 
 ---
 
@@ -20,10 +20,8 @@ This project is a **network stress testing tool** designed for educational and e
 
 ## **Usage**
 ### **1. Clone the Repository**
-```bash
-git clone <repository_url>
-cd <repository_directory>
-```
+git https://github.com/dinesh-2047/dotslash-repo.git
+cd dotslash-repo
 
 ### **2. Install Dependencies**
 This script uses only Python’s standard library, so no additional dependencies are required.
@@ -31,7 +29,7 @@ This script uses only Python’s standard library, so no additional dependencies
 ### **3. Run the Script**
 Execute the script using:
 ```bash
-python script_name.py
+python main.py
 ```
 
 ### **4. Provide Input**
@@ -69,18 +67,10 @@ This function:
 - Add support for different payload types.
 - Include logging to track connection statistics.
 - Integrate proxy support for anonymized testing.
-
----
-
-## **License**
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
-
+  
 ---
 
 ## **Contributors**
-- **Your Name** (Primary Developer)  
-Feel free to contribute by submitting pull requests or raising issues.
-
---- 
-
-This README follows a standard format, including all necessary details up to the `attack` function. You can expand it further as you develop additional functionality!
+- Devashish (Leader- Cyber Sentinels)(Primary Developer)
+- Dinesh Bhardwaj (Contributor)
+- Sourabh Choudhary (Contributor)
