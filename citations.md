@@ -9,6 +9,14 @@ Implementation: socket.socket(socket.AF_INET, socket.SOCK_STREAM) creates a TCP 
 Python Threading Module (Python Official Documentation: threading)
 https://www.google.com/url?sa=E&source=gmail&q=https://docs.python.org/3/library/threading.html
 
+### Networking Basics:
+"Networking Fundamentals" by Microsoft:
+https://learn.microsoft.com/en-us/learn/modules/networking-fundamentals/
+DDoS Attack Understanding:
+
+"What is a DDoS Attack?" by Cloudflare:
+https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/
+
 Purpose: Enables concurrent execution of attack threads for simulating high traffic.
 Implementation: threading.Thread(target=attack, args=(host, port, id)).start() launches a new thread for the attack function.
 TCP/IP Networking Concepts (IBM Developer: Introduction to TCP/IP [invalid URL removed])
