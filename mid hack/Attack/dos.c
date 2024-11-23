@@ -26,7 +26,7 @@ int make_socket(char *host, char *port) {
         exit(0); // Exit if address resolution fails
     }
 
-    // Iterate through the results and try to connect
+    // Iterate through the results and try to connect to server
     for (p = servinfo; p != NULL; p = p->ai_next) {
         // Create a socket
         if ((sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
