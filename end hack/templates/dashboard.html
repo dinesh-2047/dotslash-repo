@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Network Traffic Dashboard</h1>
+    <div id="graph" style="width:100%;height:600px;"></div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/graph_data');
+            const data = await response.json();
+            return data.graph_data;
+        }
+
+        async function plotData() {
+            const data = await fetchData();
+            const trace1 = {
+                x: data.times,
+                y: data.packet_counts,
+                z: data.anomaly_scores,
+                mode: 'markers',
+                marker: {
+                    size: data.mitigated_requests,
+                    color: data.mitigated_requests,
+                    colorscale: 'Viridis',
+                    colorbar: { title: 'Mitigated Requests' },
+                },
+                type: 'scatter3d'
+            };
+
+            const layout = {
+                title: '3D Visualization of Traffic Anomalies and Mitigations',
+                scene: {
+                    xaxis: { title: 'Time' },
+                    yaxis: { title: 'Packet Count' },
+                    zaxis: { title: 'Anomaly Score' }
+                }
+            };
+
+            Plotly.newPlot('graph', [trace1], layout);
+        }
+
+        window.onload = plotData;
+    </script>
+</body>
+</html>
