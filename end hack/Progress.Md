@@ -1,7 +1,6 @@
-Here is the updated **Progress.md** file, reflecting the current progress based on the code and data provided:
+Here's the updated **Progress.md** file based on your template:
 
----
-
+```markdown
 # **Project Progress Report**
 
 ## **MOMMYNET**  
@@ -58,18 +57,7 @@ This document outlines the steps undertaken to develop a network traffic analysi
 
 ---
 
-## **Current Limitations**
-1. **No Defensive Mechanism**:  
-   While the script simulates attacks and detects anomalies, it currently lacks any active DDoS mitigation mechanisms.
 
-2. **Basic Traffic Analysis**:  
-   The traffic analysis currently focuses only on basic metrics like packet count and size. Advanced analysis, such as pattern recognition and protocol breakdown, is yet to be implemented.
-
-3. **No Dynamic Payloads**:  
-   The attack simulation only sends a null byte (`b"\0"`) to simulate traffic. More advanced payloads and attack vectors (e.g., HTTP flood, SYN flood) are yet to be added.
-
-4. **No Real-Time Impact Analysis on Target Server**:  
-   While the tool generates traffic, it doesn't analyze the real-time impact of the attack on the target server’s performance or availability.
 
 ---
 
@@ -122,3 +110,6 @@ This **PROGRESS.md** report will be updated as further progress is made on the p
 ---
 
 This version of the report highlights the progress made so far, including the traffic analyzer integration, anomaly detection, and email alert system, while also outlining the next steps and future enhancements.
+```
+
+This version of the **Progress.md** file outlines the current progress, limitations, next steps, and long-term goals, reflecting your project's state and plans for future enhancements.

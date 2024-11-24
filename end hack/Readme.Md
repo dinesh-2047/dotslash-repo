@@ -1,29 +1,27 @@
 # **MOMMYNET**
 
-This project is a **Network Anomaly Detection and Mitigation System** designed to detect anomalies in network traffic, such as DDoS attacks or unusual traffic patterns. It includes a traffic simulator that generates data, an anomaly detector that uses machine learning to identify outliers, and a real-time reporting system. The system also features an email alert mechanism that triggers when certain anomaly thresholds are reached.
+This project is a **Network Anomaly Detection and Mitigation System** designed to detect anomalies in network traffic, such as DDoS attacks or unusual traffic patterns. It includes a traffic simulator that generates data, an anomaly detector that uses machine learning to identify outliers, and a real-time reporting system. The system also features an **IP-based Attack Mitigation Engine**, which simulates attacks and applies mitigation techniques when the traffic is identified as suspicious.
 
 ---
 
 ## **Features**
-- Creates multiple simultaneous TCP connections to a target server.
-- Continuously sends data to the target, simulating a DoS attack.
-- Utilizes threading for efficient traffic handling.
-- Traffic analyzer to monitor network traffic in real-time.
-- GUI dashboard for controlling the attack and viewing network data.
-- Displays anomaly and mitigated data.
-- **Anomaly Detection**: Uses an Isolation Forest model to detect traffic anomalies.
-- **Email Notifications**: Automatically sends email alerts when anomalies exceed a defined threshold.
-- **Real-Time Logging**: Tracks and logs detected anomalies, sent emails, and packet data.
-- **Adaptive Learning**: The anomaly detection model is retrained periodically to improve its accuracy.
+- Simulates incoming network traffic to a target server and monitors packet flow.
+- Detects anomalies in the traffic using an **Anomaly Detector**.
+- Utilizes threading for efficient traffic handling and attack simulation.
+- **Mitigation Engine**: Drops or mitigates incoming connections based on the attack rate.
+- **Real-Time Logging**: Tracks and logs detected anomalies, mitigation actions, and traffic statistics.
+- **Attack Mitigation**: Automatically applies rate limiting to prevent server overload during potential DDoS attacks.
+- **Summary Reporting**: Generates summaries of attack and mitigation statistics after each cycle.
+- **Email Notifications**: Automatically sends email alerts when anomalies exceed a defined threshold (if configured).
+- **Real-Time Dashboard**: Offers an optional real-time display of attack counts and mitigated requests.
 
 ---
 
 ## **Requirements**
 - Python 3.x
-- Tkinter library for GUI (if applicable)
-- `scikit-learn` for anomaly detection
-- `SendGrid` for email notifications
+- `scikit-learn` for anomaly detection (if used)
 - Basic understanding of network traffic and anomaly detection techniques
+- `SendGrid` for email notifications (if email alert feature is configured)
 
 ---
 
@@ -40,57 +38,58 @@ This script requires the following Python libraries:
 pip install scikit-learn numpy
 ```
 
-### **3. Configure Email**
-- Replace `SENDGRID_API_KEY`, `SENDER_EMAIL`, and `RECEIVER_EMAIL` in the script with your own SendGrid credentials.
+### **3. Configure Email** (Optional)
+If you wish to enable email notifications, replace the placeholders in the script with your own SendGrid credentials:
+- Replace `SENDGRID_API_KEY`, `SENDER_EMAIL`, and `RECEIVER_EMAIL` in the script.
 
 ### **4. Run the Script**
-Execute the main script to start real-time packet analysis and anomaly detection:
+Execute the main script to start the anomaly detection and mitigation system:
 ```bash
 python main.py
 ```
 
-### **5. Provide Input (GUI)**  
-If running with a GUI (Tkinter):
-- **Packet Count**: Number of packets to simulate.
+### **5. Provide Input**
+If running with the real-time packet simulation:
+- **Packet Count**: Define the number of packets to simulate in each cycle.
 - **Threshold**: Set the anomaly detection threshold.
 
 ---
 
 ## **Script Breakdown**
 
-### **1. `AnomalyDetector` Class**
+### **1. `MitigationEngine` Class**
+This class handles the mitigation of potential attacks:
+- **Purpose**: Simulate incoming traffic and apply mitigation techniques like rate limiting when an attack is detected.
+- **Key Methods**:
+  - `mitigate_attack()`: Analyzes incoming traffic and drops requests if attack thresholds are exceeded (e.g., more than 1000 requests in under 10 seconds).
+  - `print_summary()`: Prints a summary of the current attack and mitigation stats, including requests mitigated and time since last mitigation.
+
+### **2. `AnomalyDetector` Class**
 This class uses **Isolation Forest** for anomaly detection:
 - **Threshold**: A score threshold for anomaly detection (negative values indicate outliers).
-- **Adaptive Training**: The model is retrained when the packet variance exceeds a certain threshold.
-
 - **Key Methods**:
-  - `detect_anomaly(value)`: Detects anomalies based on packet count.
-  - `categorize_anomaly(packet_count)`: Categorizes the type of anomaly (e.g., low or high traffic spikes).
-  - `adaptive_training()`: Retrains the model based on new packet history.
+  - `detect_anomaly(value)`: Detects anomalies based on the packet count.
+  - `adaptive_training()`: Retrains the model based on new packet data to improve accuracy over time.
 
-### **2. `TrafficSimulator` Class**
-This class simulates traffic by generating random packets and passing them to the anomaly detector.
+### **3. `DataVisualizer` Class**
+This class visualizes the network data in real-time:
+- **Purpose**: Visualizes traffic, anomaly scores, and mitigated requests using 3D plotting.
+- **Key Methods**:
+  - `capture_data()`: Captures and stores packet data, including packet count, anomaly score, and mitigated requests.
+  - `simulate_data()`: Simulates traffic and anomalies, using the `AnomalyDetector` and `MitigationEngine` for detection and mitigation.
+  - `visualize_data_3d()`: Visualizes the packet data in a 3D graph.
 
-- **simulate_packet()**: Simulates a packet and returns the packet count for anomaly detection.
+### **4. Real-Time Packet Inspector**
+- The system simulates network traffic, analyzes it for anomalies, and triggers mitigation and alerts when required.
 
-### **3. `PacketAnalyzer` Class**
-The packet analyzer handles the detection of anomalies based on the simulated traffic and uses the **AnomalyDetector** to categorize potential issues.
+---
 
-### **4. `EnhancedReporting` Class**
-This class handles email reporting:
-- **report_anomaly()**: Sends anomaly details via email when triggered.
-- **summarize_anomalies()**: Prints a summary of all detected anomalies.
-
-
-### **5. Logging**
+## **Logging**
 The system logs key events, including anomaly detection and email notifications, to a log file (`anomaly_detection.log`).
 
 - **log_anomaly_detection()**: Logs anomaly detection events.
 - **log_email_sent()**: Logs email notifications sent to the receiver.
 - **log_packet_info()**: Logs packet details as they are analyzed.
-
-### **7. Real-Time Packet Inspector**
-The real-time packet inspector simulates network traffic, analyzes it for anomalies, and triggers alerts via email when required.
 
 ---
 
@@ -117,13 +116,14 @@ The real-time packet inspector simulates network traffic, analyzes it for anomal
 
 ---
 
-This README explains the key functionalities of the anomaly detection system, covering traffic simulation, anomaly detection, email alerts, and logging. It provides users with clear instructions for installation and usage, along with a breakdown of the code components.
+This README explains the key functionalities of the anomaly detection and mitigation system, covering traffic simulation, anomaly detection, attack mitigation, email alerts, and logging. It provides users with clear instructions for installation, configuration, and usage.
 ```
 
 ### Key Updates:
 
-1. **Features**: Added the real-time anomaly detection, email notifications, and adaptive learning aspects.
-2. **Script Breakdown**: Updated with details about the `AnomalyDetector`, `TrafficSimulator`, `PacketAnalyzer`, and `EnhancedReporting` classes.
-3. **Logging and Email Reporting**: Emphasized logging of anomaly detection events and email notifications.
+1. **Features**: Added details about the **Mitigation Engine** and the ability to visualize data in real-time with 3D plots.
+2. **Script Breakdown**: Updated with the `MitigationEngine`, `AnomalyDetector`, and `DataVisualizer` classes.
+3. **Logging and Email Reporting**: Added emphasis on real-time logging and email notifications for anomaly detection and mitigation.
+4. **Real-Time Packet Inspector**: Explained the role of the packet inspector in simulating and analyzing network traffic.
 
-The overall content remains the same while reflecting the updated functionality based on your provided code.
+This version reflects the updated functionality based on the recent code provided.
