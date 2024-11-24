@@ -51,7 +51,7 @@ class DataVisualizer:
         cbar = plt.colorbar(sc)
         cbar.set_label('Mitigated Requests')
 
-        # Set axis labels and the title of the plot
+        # Set axis labels & the title of the plot
         ax.set_xlabel('Time')
         ax.set_ylabel('Packet Count')
         ax.set_zlabel('Anomaly Score')
